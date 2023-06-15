@@ -24,7 +24,8 @@ ENV USER='heywoodlh'
 RUN sh <(curl -L https://nixos.org/nix/install) --no-daemon \
     && sudo install -d -m755 -o $(id -u) -g $(id -g) /nix \
     && source $HOME/.nix-profile/etc/profile.d/nix.sh \
-    && /home/heywoodlh/.nix-profile/bin/nix --extra-experimental-features "nix-command flakes" --keep-going run github:heywoodlh/nixos-configs#homeConfigurations.heywoodlh-server.activationPackage --impure
+    && git clone https://github.com/heywoodlh/nixos-configs ~/opt/nixos-configs \
+    && /home/heywoodlh/.nix-profile/bin/nix --extra-experimental-features "nix-command flakes" --keep-going run ~/opt/nixos-configs#homeConfigurations.heywoodlh-server.activationPackage --impure
 
 RUN sudo chsh -s /home/heywoodlh/.nix-profile/bin/zsh heywoodlh
 
